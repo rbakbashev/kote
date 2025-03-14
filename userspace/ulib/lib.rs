@@ -72,9 +72,12 @@ pub fn getch(echo: bool) -> u64 {
 
 pub fn readline<'s>() -> &'s str {
     static mut BUF: [u8; 128] = [0; 128];
+
     let mut idx = 0;
 
     unsafe {
+        BUF.fill(0);
+
         while idx < BUF.len() {
             let ch = getch(true) as u8;
 
