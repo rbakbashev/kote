@@ -4,6 +4,7 @@
 
 [build]
 target-dir = "build/rust"
+target = "kernel/arch/x64/x64-kernel.json"
 
 [unstable]
 build-std-features = ["compiler-builtins-mem"]
