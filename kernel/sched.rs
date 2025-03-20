@@ -33,7 +33,7 @@ impl Scheduler {
         }
     }
 
-    fn get_next(&mut self) -> TaskSwitch {
+    fn get_next(&self) -> TaskSwitch {
         for (idx, proc) in self.processes.iter_round_robin() {
             if proc.state == State::Runnable {
                 return TaskSwitch::NewTask(idx, *proc);

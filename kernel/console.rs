@@ -94,7 +94,7 @@ impl Console {
         self.cursor_y += 1;
     }
 
-    fn shift_up(&mut self) {
+    fn shift_up(&self) {
         let bpp = self.fb.bytes_per_pixel as usize;
         let row = bpp * (self.width * self.font.width) as usize;
         let src = (self.fb.addr.0 + row * self.font.height) as *const u8;

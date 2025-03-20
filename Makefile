@@ -95,7 +95,7 @@ qemu: $(KERNISO)
 
 clippy:
 	@$(call ECHO, cargo)
-	@$(CARGO) clippy $(CFLAGS) -- -W clippy::all
+	@$(CARGO) clippy $(CFLAGS) -- -W clippy::pedantic -W clippy::nursery -W clippy::unwrap_used
 
 $(KERNBIN): $(OBJS)
 	@$(call ECHO, ld)
@@ -130,7 +130,7 @@ $(ISODIR):
 
 clean:
 	@$(call ECHO)
-	@rm -rf $(BUILDDIR) $(KERNBIN) $(KERNISO)
+	@rm -rf $(BUILDDIR)
 
 -include debug.mk
 -include overrides.mk

@@ -68,8 +68,6 @@ impl<T> SpinlockMutex<T> {
     }
 }
 
-unsafe impl<T> Send for SpinlockMutex<T> {}
-
 unsafe impl<T> Sync for SpinlockMutex<T> {}
 
 pub struct SpinlockGuard<'a, T> {
@@ -77,7 +75,7 @@ pub struct SpinlockGuard<'a, T> {
     pub data: &'a mut T,
 }
 
-impl<'a, T> Drop for SpinlockGuard<'a, T> {
+impl<T> Drop for SpinlockGuard<'_, T> {
     fn drop(&mut self) {
         self.lock.unlock();
     }

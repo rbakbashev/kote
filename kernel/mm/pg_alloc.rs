@@ -80,7 +80,7 @@ pub fn perform_page_op(addr: PhysAddr, mut op: impl FnMut(&mut PageInfo)) {
     op(page);
 }
 
-pub fn init(area_start: VirtAddr, maxpages: usize, info: &mut BootloaderInfo) {
+pub fn init(area_start: VirtAddr, maxpages: usize, info: &BootloaderInfo) {
     let mut infos = PAGE_INFOS.lock();
     let mut freep = FREE_PAGES.lock();
 
