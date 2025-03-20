@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-use core::arch::asm;
+use core::arch::{asm, naked_asm};
 use core::{mem, ptr};
 
 use crate::mm::types::{RootPageDirOps, VirtAddr};
@@ -174,7 +174,7 @@ pub fn switch_to_process(proc: Process) -> ! {
 #[naked]
 extern "C" fn do_switch(registers: &RegisterFrame) -> ! {
     unsafe {
-        asm!(r#"
+        naked_asm!(r#"
         push [rdi + {offset_ss}]      // prepare data to be restored by iret
         push [rdi + {offset_rsp}]     // aka Long-Mode stack after interrupt
         push [rdi + {offset_rflags}]
@@ -218,7 +218,6 @@ extern "C" fn do_switch(registers: &RegisterFrame) -> ! {
         offset_rflags = const 144,
         offset_rsp = const 152,
         offset_ss = const 160,
-        options(noreturn)
-        );
+        )
     }
 }

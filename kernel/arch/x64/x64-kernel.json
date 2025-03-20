@@ -1,13 +1,17 @@
 {
     "arch": "x86_64",
     "cpu": "x86-64",
-    "data-layout": "e-m:e-i64:64-f80:128-n8:16:32:64-S128",
+    "code-model": "kernel",
+    "data-layout": "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128",
     "disable-redzone": true,
     "executables": true,
-    "features": "-mmx,-sse,+soft-float",
+    "features": "-mmx,-sse,-sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-avx,-avx2,+soft-float",
     "linker-flavor": "ld",
-    "llvm-target": "x86_64-unknown-none",
+    "llvm-target": "x86_64-unknown-none-elf",
     "panic-strategy": "abort",
     "frame-pointer": "always",
-    "target-pointer-width": "64"
+    "target-pointer-width": "64",
+    "max-atomic-width": 64,
+    "rustc-abi": "x86-softfloat",
+    "relro-level": "full"
 }

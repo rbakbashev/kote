@@ -13,11 +13,7 @@ use crate::serial::SERIAL;
 fn panic(info: &PanicInfo) -> ! {
     interrupts::disable();
 
-    print_force!("Kernel panic");
-
-    if let Some(msg) = info.message() {
-        print_force!(": {}", msg);
-    }
+    print_force!("Kernel panic: {}", info.message());
 
     if let Some(loc) = info.location() {
         print_force!(" at {}", loc);

@@ -11,11 +11,11 @@ use core::arch::asm;
 #[macro_use]
 pub mod print;
 
-extern "Rust" {
+unsafe extern "Rust" {
     fn main();
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn _start(_argc: usize, _argv: usize) {
     unsafe {
         main();
